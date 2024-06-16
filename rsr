@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocation Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="location">Determining your location...</h1>
+    </div>
+    <script>
+        fetch('http://api.ipstack.com/check?access_key=165b73cef53906')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('location').innerText = You are located in ${data.city}, ${data.region_name}, ${data.country_name};
+            })
+            .catch(error => {
+                document.getElementById('location').innerText = 'Unable to determine location.';
+                console.error('Error fetching location:', error);
+            });
+    </script>
+</body>
+</html>
